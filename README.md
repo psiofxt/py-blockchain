@@ -8,7 +8,7 @@ In the py-blockchain folder:
 ```
 $ python run.py
 ```
-The flask endpoints will be setup in localhost:5000
+The flask endpoints will be setup in localhost:5000 \n
 Test a few of the endpoints in your browser:
 ```
 http://localhost:5000/mine

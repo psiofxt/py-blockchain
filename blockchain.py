@@ -48,7 +48,7 @@ class Blockchain(object):
 
         self.current_transactions.append({
             'sender': sender,
-            'receipient': recipient,
+            'recipient': recipient,
             'amount': amount
         })
 
