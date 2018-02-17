@@ -11,6 +11,6 @@ from blockchain import Blockchain
 if __name__ == '__main__':
     node = str(uuid4()).replace('-', '')
     blockchain = Blockchain()
-    blockchain.new_block(0)
+    blockchain.new_block(100)
     api = BlockAPI(blockchain, node)
     api.run()
