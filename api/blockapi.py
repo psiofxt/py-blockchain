@@ -26,6 +26,40 @@ class BlockAPI():
         blockchain = self.blockchain
         node = self.node
 
+        @app.route('/nodes/register', methods=['POST'])
+        def register_nodes():
+            values = request.get_json()
+
+            nodes = values.get('nodes')
+            if nodes is None:
+                return "Error: Please supply a valid list of nodes", 400
+
+            for node in nodes:
+                blockchain.register_node(node)
+
+            response = {
+                'message': 'New nodes have been added',
+                'total_nodes': list(blockchain.nodes),
+            }
+            return jsonify(response), 201
+
+        @app.route('/nodes/resolve', methods=['GET'])
+        def consesus():
+            replaced = blockchain.resolve_conflicts()
+
+            if replaced:
+                response = {
+                    'message': 'Chain replaced',
+                    'new_chain': blockchain.chain
+                }
+            else:
+                response = {
+                    'message': 'Current chain is KING',
+                    'chain': blockchain.chain
+                }
+
+            return jsonify(response), 200
+
         @app.route('/mine', methods=['GET'])
         def mine():
             last_block = blockchain.last_block
